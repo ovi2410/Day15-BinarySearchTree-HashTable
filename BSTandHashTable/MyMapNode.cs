@@ -39,6 +39,12 @@ namespace BSTandHashTable
             if (itemFound)
             {
                 linkedList.Remove(foundItem);
+                Console.WriteLine("\n>> {0} Keyvalue is removed from HashTable....\n", key);
+
+            }
+            else
+            {
+                Console.WriteLine("\n>> {0} Keyvalue is not present in HashTable....\n", key);
             }
 
 
@@ -97,16 +103,15 @@ namespace BSTandHashTable
 
         }
 
-        public void GetFreq() // get the Freq of Repetation of Strings in our items array of size 16
+        public void RemoveWord() // get the Freq of Repetation of Strings in our items array of size 16
         {
             MyMapNode<string, int> myMap = new MyMapNode<string, int>(10);
-            string[] Paragraph;
-            string input = "Paranoids are not paranoid because they are paranoid but because they keep putting themselves deliberately into paranoid avoidable situations";
-            Paragraph = input.Split(' ');
-            //Given string input
+            string[] paragraph1;
+            string input1 = "Paranoids are not paranoid because they are paranoid but because they keep putting themselves deliberately into paranoid avoidable situations";
+            paragraph1 = input1.Split(' ');
 
             int counts = 1;
-            foreach (string i in Paragraph)
+            foreach (string i in paragraph1)
             {
                 counts = myMap.CheckHash(i);
                 if (counts > 1)
@@ -118,9 +123,12 @@ namespace BSTandHashTable
                     myMap.Add(i, 1);
                 }
             }
-            Console.WriteLine("\n>> Frequency of words in paragraph :-\n");
-            IEnumerable<string> distinct = Paragraph.Distinct<string>();
-            foreach (var i in distinct)
+
+            IEnumerable<string> unique = paragraph1.Distinct<string>();
+            Console.WriteLine("\nEnter the word which you want to remove in paragraph");
+            string removeWord = Console.ReadLine();
+            myMap.Remove(removeWord);
+            foreach (var i in unique)
             {
                 myMap.Display(i);
             }
